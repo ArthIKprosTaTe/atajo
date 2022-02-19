@@ -19,13 +19,11 @@ public class Bicicleta {
         int sum2 = 0;
         int sum3 = 0;
         
-        for(int i=0; i<camino1.length; i++)
-        {
-            sum1 += camino1[i];
-            sum2 += camino2[i];
-            sum3 += camino3[i];
-        }
+        sum1 = ttotalRuta1(camino1, sum1);
+        sum2 = totalRuta2(camino2, sum2);
+        sum3 = totalRuta3(camino3, sum3);
         
+       
         if(sum1 < sum2 && sum1 < sum3)
         {
             return "camino 1"; 
@@ -39,10 +37,10 @@ public class Bicicleta {
             if(sum1 == sum2 && sum2 == sum3)
             {
                 return "camino 1, 2 y 3";
-            }else if(sum1 == sum3)
+            }else if( sum2 > sum1 && sum1 == sum3)
             {
                 return "caminos 1 y 3";
-            }else if(sum2 == sum3){
+            }else if( sum1 > sum2 && sum2 == sum3){
                 return "caminos 2 y 3";
             }else{
                 return "caminos 1 y 2";
@@ -51,6 +49,35 @@ public class Bicicleta {
         
     }
 
+	public static int totalRuta3(int[] camino3, int sum3) {
+		for(int i=0; i<camino3.length; i++)
+        {
+            sum3 += camino3[i];
+        }
+		return sum3;
+	}
+
+	public static int totalRuta2(int[] camino2, int sum2) {
+		sum2 = totalRuta3(camino2, sum2);
+		return sum2;
+	}
+
+	public static int ttotalRuta1(int[] camino1, int sum1) {
+		sum1 = totalRuta2(camino1, sum1);
+		return sum1;
+	}
+
+    
+    
+	
+    
+    
+    
+    
+    
+    
+    
+    
     public static void main(String[] args) {
         Bicicleta bici = new Bicicleta();
         int[] camino1 = {12,34,21,46,25};
